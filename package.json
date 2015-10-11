@@ -1,0 +1,20 @@
+{
+  "name": "django-frontend",
+  "version": "1.0.0",
+  "description": "Django Frontend",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "sudo npm install -g bower",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willem-vanheemstrasystems/django-frontend.git"
+  },
+  "author": "Willem van Heemstra <willem@vanheemstrasystems.com> (http://vanheemstrasystems.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/willem-vanheemstrasystems/django-frontend/issues"
+  },
+  "homepage": "https://github.com/willem-vanheemstrasystems/django-frontend#readme"
+}

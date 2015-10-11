@@ -1,4 +1,4 @@
-Let’s verify your Django project works. Change into the outer mysite directory, if you haven’t already, and run the following commands:
+Let’s verify your Django project works. Change into the outer django-frontend directory, if you haven’t already, and run the following commands:
 
 $ python manage.py runserver
 

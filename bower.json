@@ -1,0 +1,22 @@
+{
+  "name": "bower",
+  "version": "0.0.0",
+  "homepage": "https://github.com/willem-vanheemstrasystems/django-frontend",
+  "authors": [
+    "Willem van Heemstra <wvanheemstra@icloud.com>"
+  ],
+  "description": "Bower",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}
