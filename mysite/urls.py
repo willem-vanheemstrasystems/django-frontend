@@ -17,5 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
+    url(r'^browse/', include('mysite.browse.urls', namespace="browse")),
+    url(r'^client/', include('mysite.client.urls', namespace="client")),
     url(r'^admin/', include(admin.site.urls)),
 ]
