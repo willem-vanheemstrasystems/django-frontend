@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     # ex: /polls/
+    # The 'name' value as called by the {% url 'index' %} template tag
     url(r'^$', 'mysite.polls.views.index', name='index'),
     # ex: /polls/5/
     # Django will have stripped off the matching text ("polls/") 
