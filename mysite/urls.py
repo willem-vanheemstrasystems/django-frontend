@@ -17,6 +17,10 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from mysite import views
 
+""" Whenever Django encounters include(), 
+it chops off whatever part of the URL matched up to that point 
+and sends the remaining string to the included URLconf for further processing.
+"""
 urlpatterns = [
     url(r'^$', 'mysite.views.index', name='index'),
     url(r'^browse/', include('mysite.browse.urls', namespace="browse")),
