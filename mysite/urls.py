@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from mysite import views
+from . import views
 
 """ Whenever Django encounters include(), 
 it chops off whatever part of the URL matched up to that point 
