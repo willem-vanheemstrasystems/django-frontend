@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
+from django.views import generic
 
 from .models import Choice, Question
 
@@ -11,43 +12,114 @@ from .models import Choice, Question
 file views
 '''
 
-
-def index(request):
-    '''
-    function index(request)
-    '''
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    # The code below loads the template called polls/index.html
-    # and passes it a context.
-    # The context is a dictionary mapping template variable names to Python objects.
-    context = {'latest_question_list': latest_question_list}
-    # The render() function takes the request object as its first argument, 
-    # a template name as its second argument 
-    # and a dictionary as its optional third argument. 
-    # It returns an HttpResponse object of the given template rendered with the given context.
-    return render(request, 'polls/index.html', context)
-
-
-def detail(request, question_id):
-    '''
-    function detail(request, question_id)
-    '''
-    # The get_object_or_404() function takes a Django model as its first argument 
-    # and an arbitrary number of keyword arguments, 
-    # which it passes to the get() function of the model's manager. 
-    # It raises Http404 if the object doesn't exist.
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/detail.html', {'question': question})
+# REPLACE BY class IndexView(generic.ListView)
+# def index(request):
+#     '''
+#     function index(request)
+#     '''
+#     latest_question_list = Question.objects.order_by('-pub_date')[:5]
+#     # The code below loads the template called polls/index.html
+#     # and passes it a context.
+#     # The context is a dictionary mapping template variable names to Python objects.
+#     context = {'latest_question_list': latest_question_list}
+#     # The render() function takes the request object as its first argument, 
+#     # a template name as its second argument 
+#     # and a dictionary as its optional third argument. 
+#     # It returns an HttpResponse object of the given template rendered with the given context.
+#     return render(request, 'polls/index.html', context)
 
 
-def results(request, question_id):
+# We're using a generic view here: ListView. 
+# This view abstracts the concepts of "display a list of objects."
+# Each generic view needs to know what model it will be acting upon. 
+# This is provided using the model attribute.
+# The ListView generic view uses a default template called <app name>/<model name>_list.html; 
+# we use template_name to tell ListView to use our existing "polls/index.html" template.
+# For ListView, the automatically generated context variable is question_list. 
+# To override this we provide the context_object_name attribute, 
+# specifying that we want to use latest_question_list instead. 
+# As an alternative approach, you could change your templates to match the new default context variables - 
+# but it's a lot easier to just tell Django to use the variable you want.
+class IndexView(generic.ListView):
     '''
-    function results(request, question_id)
+    class IndexView
     '''
-    # response = "You're looking at the results of question %s."
-    # return HttpResponse(response % question_id)
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/results.html', {'question': question})
+    template_name = 'polls/index.html'
+    context_object_name = 'latest_question_list'
+
+    def get_queryset(self):
+        """Return the last five published questions."""
+        return Question.objects.order_by('-pub_date')[:5]
+
+
+# REPLACE BY class DetailView(generic.DetailView)
+# def detail(request, question_id):
+#     '''
+#     function detail(request, question_id)
+#     '''
+#     # The get_object_or_404() function takes a Django model as its first argument 
+#     # and an arbitrary number of keyword arguments, 
+#     # which it passes to the get() function of the model's manager. 
+#     # It raises Http404 if the object doesn't exist.
+#     question = get_object_or_404(Question, pk=question_id)
+#     return render(request, 'polls/detail.html', {'question': question})
+
+
+# We're using a generic view here: DetailView. 
+# This view abstracts the concepts of "display a detail page for a particular type of object."
+# Each generic view needs to know what model it will be acting upon. 
+# This is provided using the model attribute.
+# The DetailView generic view expects the primary key value captured from the URL to be called "pk", 
+# so we've changed question_id to pk for the generic views.
+# By default, the DetailView generic view uses a template called <app name>/<model name>_detail.html. 
+# In our case, it would use the template "polls/question_detail.html". 
+# The template_name attribute is used to tell Django to use a specific template name 
+# instead of the autogenerated default template name.
+# Previously, the templates have been provided with a context that contains the question 
+# and latest_question_list context variables. 
+# For DetailView the question variable is provided automatically - 
+# since we're using a Django model (Question), 
+# Django is able to determine an appropriate name for the context variable. 
+class DetailView(generic.DetailView):
+    '''
+    class DetailView
+    '''    
+    model = Question
+    template_name = 'polls/detail.html'
+
+
+# REPLACE BY class ResultsView(generic.DetailView)
+# def results(request, question_id):
+#     '''
+#     function results(request, question_id)
+#     '''
+#     # response = "You're looking at the results of question %s."
+#     # return HttpResponse(response % question_id)
+#     question = get_object_or_404(Question, pk=question_id)
+#     return render(request, 'polls/results.html', {'question': question})
+
+
+# We're using a generic view here: DetailView. 
+# This view abstracts the concepts of "display a detail page for a particular type of object."
+# Each generic view needs to know what model it will be acting upon. 
+# This is provided using the model attribute.
+# The DetailView generic view expects the primary key value captured from the URL to be called "pk", 
+# so we've changed question_id to pk for the generic views.
+# By default, the DetailView generic view uses a template called <app name>/<model name>_detail.html. 
+# In our case, it would use the template "polls/question_detail.html". 
+# The template_name attribute is used to tell Django to use a specific template name 
+# instead of the autogenerated default template name. 
+# We also specify the template_name for the results list view - 
+# this ensures that the results view and the detail view have a different appearance when rendered, 
+# even though they're both a DetailView behind the scenes.
+# Previously, the templates have been provided with a context that contains the question 
+# and latest_question_list context variables. 
+# For DetailView the question variable is provided automatically - 
+# since we're using a Django model (Question), 
+# Django is able to determine an appropriate name for the context variable.
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = 'polls/results.html'
 
 
 def vote(request, question_id):
