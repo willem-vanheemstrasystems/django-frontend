@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{% block head_title %}Welcome to Django-Frontend{% endblock %}</title>
+		{% load staticfiles %}
+
+		<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+	</head>
+
+	<body>
+		<h1>{% block title %}Welcome to the Django-Frontend repository.{% endblock %}</h1>
+		{% block content %}{% endblock content %}
+	</body>
+</html>

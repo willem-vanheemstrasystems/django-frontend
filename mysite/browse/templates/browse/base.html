@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block head_title %}Welcome to Browse{% endblock %}</title>
+        {% load staticfiles %}
+
+        <link rel="stylesheet" type="text/css" href="{% static 'browse/css/style.css' %}" />
+    </head>
+
+    <body>
+        <h1>{% block title %}Welcome to the Browse application.{% endblock %}</h1>
+        {% block content %}{% endblock content %}
+    </body>
+</html>
