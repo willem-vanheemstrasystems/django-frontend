@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>{% block head_title %}Welcome to Polls{% endblock %}</title>
+        <!-- \{\% load staticfiles \%\} loads the \{\% static \%\} template tag from the staticfiles template library. The \{\% static \%\} template tag generates the absolute URL of the static file. -->
         {% load staticfiles %}
         
         <link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}" />
