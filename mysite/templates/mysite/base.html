@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>{% block head_title %}Welcome to MySite{% endblock %}</title>
-		{% load staticfiles %}
+    <head>
+        <title>{% block head_title %}Welcome to MySite{% endblock %}</title>
+        {% load staticfiles %}
 
-		<link rel="stylesheet" type="text/css" href="{% static 'mysite/style.css' %}" />
-	</head>
+        <link rel="stylesheet" type="text/css" href="{% static 'mysite/css/style.css' %}" />
+    </head>
 
-	<body>
-		<h1>{% block title %}Welcome to the MySite project.{% endblock %}</h1>
-		{% block content %}{% endblock content %}
-	</body>
+    <body>
+        <h1>{% block title %}Welcome to the MySite project.{% endblock %}</h1>
+        {% block content %}{% endblock content %}
+    </body>
+    <script src="{% static 'mysite/js/mysite.js' %}"></script>
 </html>
