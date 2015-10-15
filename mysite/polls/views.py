@@ -93,6 +93,12 @@ class DetailView(generic.DetailView):
     '''    
     model = Question
     template_name = 'polls/detail.html'
+    
+    def get_queryset(self):
+        """
+        Excludes any questions that aren't published yet (e.g. with publish dates in the future).
+        """
+        return Question.objects.filter(pub_date__lte=timezone.now())
 
 
 # REPLACE BY class ResultsView(generic.DetailView)
