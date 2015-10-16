@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'mysite.browse',
     'mysite.client',
     'mysite.polls',
+    'mysite',
 )
 
 MIDDLEWARE_CLASSES = (
