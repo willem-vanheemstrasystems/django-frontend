@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "sudo npm install -g bower",
+    "preinstall": "pip install --upgrade pip",
+    "preinstall": "pip install django-bower",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

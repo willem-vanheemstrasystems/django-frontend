@@ -11,5 +11,5 @@
         <h1>{% block title %}Welcome to the MySite project.{% endblock %}</h1>
         {% block content %}{% endblock content %}
     </body>
-    <script src="{% static 'mysite/js/mysite.js' %}"></script>
+    {% block libs %}{% endblock libs %}
 </html>
